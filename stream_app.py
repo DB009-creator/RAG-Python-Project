@@ -26,10 +26,10 @@ st.markdown("""
 div[data-testid="stTextArea"] textarea {
     border-radius: 12px !important;
     border: 1px solid #b3d8ff !important;
-    background: #f8fbff !important;
+    /* background: #f8fbff !important;  <-- 建议把这行也删掉，让它自动适应深色背景 */
     padding: 14px !important;
     font-size: 15px;
-    color: #000000 !important;
+    /* color: #000000 !important;  <-- 删掉这行，或者改成 color: inherit !important; */
 }
 div[data-testid="stTextArea"] textarea::placeholder {
     color: #666666 !important;
