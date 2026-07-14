@@ -72,7 +72,18 @@ div[data-testid="stButton"] > button {
 
 
 # 从 .env 文件加载环境变量的辅助函数
+# ==========================================
+# 修改后的密钥获取函数 (兼容本地和云端)
+# ==========================================
 def getEnvInfo(key):
+    # 1. 优先尝试从 Streamlit Secrets (网页端配置) 获取
+    try:
+        # st.secrets 结构通常是 [general] -> KEY_NAME
+        return st.secrets["general"][key]
+    except Exception:
+        pass # 如果网页端没配，或者不在Streamlit环境，就忽略错误继续往下走
+
+    # 2. 如果上面失败了，再尝试读取本地的 .env 文件 (保持原有逻辑)
     env_res = None
     try:
         with open('.env', 'r') as f:
@@ -82,7 +93,8 @@ def getEnvInfo(key):
                     env_res = line.split("=", 1)[1].strip()
                     break
     except FileNotFoundError:
-        st.warning(".env 文件未找到。")
+        # 这里不要 warning 了，因为云端本来就没有文件，warning 会误导用户
+        pass 
     return env_res
 
 
