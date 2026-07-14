@@ -26,8 +26,11 @@ st.markdown("""
 div[data-testid="stTextArea"] textarea {
     border-radius: 12px !important;
     border: 1px solid #b3d8ff !important;
+    /* 背景色保持浅色，但去掉强制字体颜色，让它自动变黑 */
+    background: #f8fbff !important; 
     padding: 14px !important;
     font-size: 15px;
+    /* color: #000000 !important;  <-- 删掉这一行！或者改成 inherit */
 }
 div[data-testid="stTextArea"] textarea::placeholder {
     color: #666666 !important;
@@ -44,18 +47,24 @@ div[data-testid="stButton"] > button {
     padding: 8px;
 }
 /* 对话气泡样式 */
+/* 对话气泡样式 */
 .chat-message {
     padding: 1rem;
     border-radius: 12px;
     margin: 0.8rem 0;
+    color: #333333 !important; /* <--- 新增：强制气泡内文字为深灰色，确保在浅色背景下可见 */
 }
+
 .user-message {
     background-color: #e6f7ff;
     border-left: 4px solid #1890ff;
+    color: #000000 !important; /* <--- 新增：用户消息强制黑字 */
 }
+
 .assistant-message {
-    background-color: #f6ffed;
+    background-color: #f6ffed; /* 这是一个很浅的绿色背景 */
     border-left: 4px solid #87d068;
+    color: #000000 !important; /* <--- 新增：助手消息强制黑字 */
 }
 .source-info {
     margin-top: 0.5rem;
