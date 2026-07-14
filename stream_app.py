@@ -7,6 +7,7 @@ from rag_system import RagSystem  # 导入后端文件
 # ==========================================
 st.markdown("""
 <style>
+/* 顶部标题栏 */
 .main-header {
     font-size: 36px !important;
     font-weight: 700 !important;
@@ -22,50 +23,55 @@ st.markdown("""
     margin-bottom: 30px;
     letter-spacing: 2px;
 }
-/* 多行文本输入框 */
+
+/* --- 核心修改区：输入框样式 --- */
 div[data-testid="stTextArea"] textarea {
     border-radius: 12px !important;
     border: 1px solid #b3d8ff !important;
-    /* 背景色保持浅色，但去掉强制字体颜色，让它自动变黑 */
-    background: #f8fbff !important; 
+    
+    /* 关键修复：使用 !important 强制背景为纯白/极浅色，防止被深色模式覆盖 */
+    background-color: #ffffff !important; 
+    color: #000000 !important; /* 强制文字为黑色 */
+    
     padding: 14px !important;
     font-size: 15px;
-    /* color: #000000 !important;  <-- 删掉这一行！或者改成 inherit */
 }
+
+/* 输入框提示语 (Placeholder) */
 div[data-testid="stTextArea"] textarea::placeholder {
     color: #666666 !important;
-    opacity: 0.8 !important;
+    opacity: 1 !important; /* 提高不透明度，确保可见 */
 }
-/* form按钮样式 */
+
+/* 按钮样式 */
 div[data-testid="stFormSubmitButton"] button {
     border-radius: 8px;
     height: 42px;
 }
-/* 快捷按钮 */
 div[data-testid="stButton"] > button {
     border-radius: 8px;
     padding: 8px;
 }
-/* 对话气泡样式 */
-/* 对话气泡样式 */
+
+/* --- 核心修改区：对话气泡样式 --- */
 .chat-message {
     padding: 1rem;
     border-radius: 12px;
     margin: 0.8rem 0;
-    color: #333333 !important; /* <--- 新增：强制气泡内文字为深灰色，确保在浅色背景下可见 */
+    /* 强制气泡内文字颜色，防止继承页面的白色 */
+    color: #000000 !important; 
 }
 
 .user-message {
-    background-color: #e6f7ff;
+    background-color: #e6f7ff !important; /* 强制浅蓝背景 */
     border-left: 4px solid #1890ff;
-    color: #000000 !important; /* <--- 新增：用户消息强制黑字 */
 }
 
 .assistant-message {
-    background-color: #f6ffed; /* 这是一个很浅的绿色背景 */
+    background-color: #f6ffed !important; /* 强制浅绿背景 */
     border-left: 4px solid #87d068;
-    color: #000000 !important; /* <--- 新增：助手消息强制黑字 */
 }
+
 .source-info {
     margin-top: 0.5rem;
     padding: 0.5rem;
